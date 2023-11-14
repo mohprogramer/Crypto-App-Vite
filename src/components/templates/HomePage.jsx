@@ -7,9 +7,15 @@ const HomePage = () => {
     const [coins, setCoins] = useState([]);
 
     useEffect(() =>{
-        fetch(getCryptoList())
-        .then(res => res.json())
-        .then(data => setCoins(data))
+
+        const getData = async () => {
+            const res = await fetch(getCryptoList());
+            const json  = await res.json();
+            setCoins(json)
+        }
+
+        getData();
+        
     }, [])
 
     return (
