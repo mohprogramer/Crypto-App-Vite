@@ -1,9 +1,7 @@
-import React from 'react';
-
-const TableCoin = () => {
+const TableCoin = ({data}) => {
     return (
         <div>
-            
+            {console.log(data)}
         </div>
     );
 };
