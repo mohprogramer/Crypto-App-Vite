@@ -15,7 +15,7 @@ const HomePage = () => {
         }
 
         getData();
-        
+        console.log(coins)
     }, [])
 
     return (
