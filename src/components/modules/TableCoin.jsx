@@ -1,5 +1,4 @@
-import chartUp from '../../asset/chart-up.svg';
-import chartDown from '../../asset/chart-down.svg'
+import TableRow from "./TableRow";
 
 const TableCoin = ({data}) => {
     return (
@@ -16,18 +15,8 @@ const TableCoin = ({data}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map(item => <tr key={item.id} >
-                        <td>
-                            <div>
-                                <img src={item.image} alt={item.name} />
-                                <span>{item.symbol.toUpperCase()}</span>
-                            </div>
-                        </td>
-                        <td>${item.current_price.toLocaleString()}</td>
-                        <td>{item.price_change_percentage_24h.toFixed(2)}%</td>
-                        <td>${item.total_volume.toLocaleString()}</td>
-                        <td><img src={item.price_change_percentage_24h > 0 ? chartUp : chartDown} alt={item.name} /></td>
-                    </tr>)}
+                    {data.map(item =>
+                        <TableRow key={item.id} coin={item} /> )}
                 </tbody>
             </table>
         </div>
@@ -35,3 +24,7 @@ const TableCoin = ({data}) => {
 };
 
 export default TableCoin;
+
+
+
+
