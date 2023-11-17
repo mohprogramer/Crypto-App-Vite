@@ -1,9 +1,9 @@
 import TableRow from "./TableRow";
 
-const TableCoin = ({data}) => {
+const TableCoin = ({data, isLoading}) => {
     return (
         <div>
-            <table>
+           {isLoading ? <p>Loading...</p> :  <table>
                 <thead>
                     <tr>
                         <th>Coin</th>
@@ -18,7 +18,7 @@ const TableCoin = ({data}) => {
                     {data.map(item =>
                         <TableRow key={item.id} coin={item} /> )}
                 </tbody>
-            </table>
+            </table>}
         </div>
     );
 };
