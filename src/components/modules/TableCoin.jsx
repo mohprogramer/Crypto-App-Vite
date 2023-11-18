@@ -1,5 +1,5 @@
 import TableRow from "./TableRow";
-//Loading
+//Loader
 import { TailSpin } from "react-loader-spinner";
 //Style
 import styles from "./TableCoin.module.css";
@@ -19,7 +19,7 @@ const TableCoin = ({ data, isLoading }) => {
           visible={true}
         />
       ) : (
-        <table>
+        <table className={styles.table}>
           <thead>
             <tr>
               <th>Coin</th>
