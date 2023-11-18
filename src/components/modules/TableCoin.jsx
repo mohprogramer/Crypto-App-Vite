@@ -8,7 +8,7 @@ const TableCoin = ({ data, isLoading }) => {
   return (
     <div className={styles.container}>
       {isLoading ? (
-        <TailSpin
+        <TailSpin className={styles.loader}
           height="80"
           width="80"
           color="#3874ff"
