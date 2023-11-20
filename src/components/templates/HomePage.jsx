@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TableCoin from "../modules/TableCoin";
 import { getCryptoList } from "../../services/cryptoAPI";
+import Pagination from "../modules/Pagination";
 
 const HomePage = () => {
   const [coins, setCoins] = useState([]);
@@ -38,7 +39,10 @@ const HomePage = () => {
   return (
     <div>
       {isOnline ? (
+        <>
+        <Pagination />
         <TableCoin data={coins} isLoading={isLoading} />
+        </>
       ) : (
         <p>You are offline. Please check your internet connection.</p>
       )}
