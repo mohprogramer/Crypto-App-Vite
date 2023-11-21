@@ -7,10 +7,12 @@ const HomePage = () => {
   const [coins, setCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
+    setIsLoading(true);
     const getData = async () => {
-      const res = await fetch(getCryptoList());
+      const res = await fetch(getCryptoList(page));
       const json = await res.json();
       setCoins(json);
       setIsLoading(false);
@@ -34,20 +36,18 @@ const HomePage = () => {
       window.removeEventListener("online", onlineHandler);
       window.removeEventListener("offline", offlineHandler);
     };
-  }, []);
+  }, [page]);
 
   return (
     <div>
       {isOnline ? (
         <>
-        <Pagination />
-        <TableCoin data={coins} isLoading={isLoading} />
+          <Pagination page={page} setPage={setPage} />
+          <TableCoin data={coins} isLoading={isLoading} />
         </>
       ) : (
         <p>You are offline. Please check your internet connection.</p>
       )}
-
-      
     </div>
   );
 };

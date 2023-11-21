@@ -1,8 +1,7 @@
-import { useState } from "react";
+//Styles
+import styles from "./Pagination.module.css";
 
-const Pagination = () => {
-  const [page, setPage] = useState(1);
-
+const Pagination = ({ page, setPage }) => {
   const preHandler = () => {
     if (page <= 1) return;
     setPage((page) => page - 1);
@@ -14,20 +13,30 @@ const Pagination = () => {
   };
 
   return (
-    <div>
-      <button onClick={preHandler}>Previous</button>
-      <p style={{ color: page === 1 ? "green" : "inherit" }}>1</p>
-      <p>2</p>
+    <div className={styles.pagination}>
+      <button
+        onClick={preHandler}
+        className={page === 1 ? styles.disable : null}
+      >
+        Previous
+      </button>
+      <p className={page === 1 ? styles.selected : null}>1</p>
+      <p className={page === 2 ? styles.selected : null}>2</p>
       {page > 2 && page < 9 && (
         <>
           <span>...</span>
-          <p>{page}</p>
+          <p className={styles.selected}>{page}</p>
         </>
       )}
       <span>...</span>
-      <p>9</p>
-      <p>10</p>
-      <button onClick={nextHandler}>Next</button>
+      <p className={page === 9 ? styles.selected : null}>9</p>
+      <p className={page === 10 ? styles.selected : null}>10</p>
+      <button
+        onClick={nextHandler}
+        className={page === 10 ? styles.disable : null}
+      >
+        Next
+      </button>
     </div>
   );
 };
