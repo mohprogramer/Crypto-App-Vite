@@ -21,33 +21,13 @@ const HomePage = () => {
     getData();
     console.log(coins);
 
-    function onlineHandler() {
-      setIsOnline(true);
-    }
-
-    function offlineHandler() {
-      setIsOnline(false);
-    }
-
-    window.addEventListener("online", onlineHandler);
-    window.addEventListener("offline", offlineHandler);
-
-    return () => {
-      window.removeEventListener("online", onlineHandler);
-      window.removeEventListener("offline", offlineHandler);
-    };
   }, [page]);
 
   return (
     <div>
-      {isOnline ? (
-        <>
-          <Pagination page={page} setPage={setPage} />
+     
           <TableCoin data={coins} isLoading={isLoading} />
-        </>
-      ) : (
-        <p>You are offline. Please check your internet connection.</p>
-      )}
+          <Pagination page={page} setPage={setPage} />
     </div>
   );
 };
