@@ -4,7 +4,7 @@ import { TailSpin } from "react-loader-spinner";
 //Style
 import styles from "./TableCoin.module.css";
 
-const TableCoin = ({ data, isLoading }) => {
+const TableCoin = ({ data, isLoading, currency }) => {
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -32,7 +32,7 @@ const TableCoin = ({ data, isLoading }) => {
           </thead>
           <tbody>
             {data.map((item) => (
-              <TableRow key={item.id} coin={item} />
+              <TableRow key={item.id} coin={item} currency={currency} />
             ))}
           </tbody>
         </table>

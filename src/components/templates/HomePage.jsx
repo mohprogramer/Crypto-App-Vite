@@ -8,7 +8,7 @@ const HomePage = () => {
   const [coins, setCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [currency, setCurrency] = useState("usd");
+  const [currency, setCurrency] = useState({name:"usd", symbol:"$"});
 
   useEffect(() => {
     setIsLoading(true);
@@ -26,7 +26,7 @@ const HomePage = () => {
   return (
     <div>
       <Search currency={currency} setCurrency={setCurrency} />
-      <TableCoin data={coins} isLoading={isLoading} />
+      <TableCoin data={coins} isLoading={isLoading} currency={currency} />
       <Pagination page={page} setPage={setPage} />
     </div>
   );
