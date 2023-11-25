@@ -5,4 +5,8 @@
     return `${BASE_URL}/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=20&page=${page}&sparkline=false&locale=en&x_cg_demo_api_key=${API_KEY}`;
 }
 
-export {getCryptoList}
+const searchCoin = query => {
+    return `${BASE_URL}/search?query=${query}&x_cg_demo_api_key=${API_KEY}`
+}
+
+export {getCryptoList, searchCoin}
