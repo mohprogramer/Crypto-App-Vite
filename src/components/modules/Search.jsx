@@ -23,14 +23,13 @@ function Search({ currency, setCurrency }) {
         }
       }
     };
-
+    
     search();
 
     return () => controller.abort();
   }, [text]);
 
   const changeHandler = (e) => {
-    console.log("start");
     if (e.target.value === "usd") {
       setCurrency({ name: "usd", symbol: "$" });
     } else if (e.target.value === "eur") {
