@@ -1,9 +1,25 @@
 import { useEffect, useState } from "react";
 import { searchCoin } from "../../services/cryptoAPI";
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Search({ currency, setCurrency }) {
   const [text, setText] = useState("");
   const [coins, setCoins] = useState([]);
+  const [error, setError] = useState("")
+
+  const notify = () => toast.error(`😕 ${error} `, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition:Slide
+    });
 
   useEffect(() => {
     setCoins([]);
@@ -16,10 +32,11 @@ function Search({ currency, setCurrency }) {
         });
         const json = await res.json();
         console.log(json);
-        if (json.coins) setCoins(json.coins);
+        if (json.coins) setCoins(json.coins)
       } catch (error) {
-        if (error.name !== "AbortErorr") {
-          alert(error.message);
+        if (error.name !== "AbortError") {
+          setError(error.message)
+          notify(error)
         }
       }
     };
@@ -41,6 +58,7 @@ function Search({ currency, setCurrency }) {
 
   return (
     <div>
+      <ToastContainer />
       <input
         type="text"
         placeholder="Search..."
