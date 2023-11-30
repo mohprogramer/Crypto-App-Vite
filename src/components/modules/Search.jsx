@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
 import { searchCoin } from "../../services/cryptoAPI";
-import { Slide, ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { TailSpin } from "react-loader-spinner";
 
 function Search({ currency, setCurrency }) {
   const [text, setText] = useState("");
   const [coins, setCoins] = useState([]);
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  const notify = () => toast.error(`😕 ${error} `, {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-    transition:Slide
+  const notify = () =>
+    toast.error(`😕 ${error} `, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Slide,
     });
 
   useEffect(() => {
@@ -32,15 +34,15 @@ function Search({ currency, setCurrency }) {
         });
         const json = await res.json();
         console.log(json);
-        if (json.coins) setCoins(json.coins)
+        if (json.coins) setCoins(json.coins);
       } catch (error) {
         if (error.name !== "AbortError") {
-          setError(error.message)
-          notify(error)
+          setError(error.message);
+          notify(error);
         }
       }
     };
-    
+
     search();
 
     return () => controller.abort();
@@ -72,6 +74,12 @@ function Search({ currency, setCurrency }) {
       </select>
       <div>
         <ul>
+          <TailSpin
+            width="50px"
+            height="50px"
+            strokeWidth="2"
+            color="#3874ff"
+          />
           {coins.map((coin) => (
             <li key={coin.id}>
               <img src={coin.thumb} alt={coin.name} />
