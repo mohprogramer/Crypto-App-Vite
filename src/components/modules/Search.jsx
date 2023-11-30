@@ -8,7 +8,7 @@ function Search({ currency, setCurrency }) {
   const [text, setText] = useState("");
   const [coins, setCoins] = useState([]);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const notify = () =>
     toast.error(`😕 ${error} `, {
@@ -28,13 +28,15 @@ function Search({ currency, setCurrency }) {
     const controller = new AbortController();
     if (!text) return;
     const search = async () => {
+      setIsLoading(true)
       try {
         const res = await fetch(searchCoin(text), {
           signal: controller.signal,
         });
         const json = await res.json();
-        console.log(json);
         if (json.coins) setCoins(json.coins);
+        setIsLoading(false)
+        console.log(json);
       } catch (error) {
         if (error.name !== "AbortError") {
           setError(error.message);
@@ -44,7 +46,6 @@ function Search({ currency, setCurrency }) {
     };
 
     search();
-
     return () => controller.abort();
   }, [text]);
 
@@ -74,12 +75,14 @@ function Search({ currency, setCurrency }) {
       </select>
       <div>
         <ul>
-          <TailSpin
-            width="50px"
-            height="50px"
-            strokeWidth="2"
-            color="#3874ff"
-          />
+          {isLoading && (
+            <TailSpin
+              width="50px"
+              height="50px"
+              strokeWidth="2"
+              color="#3874ff"
+            />
+          )}
           {coins.map((coin) => (
             <li key={coin.id}>
               <img src={coin.thumb} alt={coin.name} />
