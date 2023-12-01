@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 //Loader
 import { TailSpin } from "react-loader-spinner";
 //Styles
-import styles from './Search.module.css'
+import styles from "./Search.module.css";
 
 function Search({ currency, setCurrency }) {
   const [text, setText] = useState("");
@@ -67,7 +67,7 @@ function Search({ currency, setCurrency }) {
   };
 
   return (
-    <div className={styles.searchBox} >
+    <div className={styles.searchBox}>
       <ToastContainer />
       <input
         type="text"
@@ -80,26 +80,28 @@ function Search({ currency, setCurrency }) {
         <option value="eur">EUR</option>
         <option value="jpy">JPY</option>
       </select>
-      <div className={text.length && styles.searchResult} >
-        <div className={styles.loader} >
-          {isLoading && (
-            <TailSpin
-              width="50px"
-              height="50px"
-              strokeWidth="2"
-              color="#3874ff"
-            />
-          )}
+      {!!text.length && (
+        <div className={styles.searchResult}>
+          <div className={styles.loader}>
+            {isLoading && (
+              <TailSpin
+                width="50px"
+                height="50px"
+                strokeWidth="2"
+                color="#3874ff"
+              />
+            )}
+          </div>
+          <ul>
+            {coins.map((coin) => (
+              <li key={coin.id}>
+                <img src={coin.thumb} alt={coin.name} />
+                <p>{coin.name}</p>
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul>
-          {coins.map((coin) => (
-            <li key={coin.id}>
-              <img src={coin.thumb} alt={coin.name} />
-              <p>{coin.name}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      )}
     </div>
   );
 }
