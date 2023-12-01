@@ -81,7 +81,7 @@ function Search({ currency, setCurrency }) {
         <option value="jpy">JPY</option>
       </select>
       <div className={styles.searchResult} >
-        <ul>
+        <div className={styles.loader} >
           {isLoading && (
             <TailSpin
               width="50px"
@@ -90,6 +90,8 @@ function Search({ currency, setCurrency }) {
               color="#3874ff"
             />
           )}
+        </div>
+        <ul>
           {coins.map((coin) => (
             <li key={coin.id}>
               <img src={coin.thumb} alt={coin.name} />

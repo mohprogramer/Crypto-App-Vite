@@ -63,3 +63,9 @@
     width: 25px;
     height: 25px;
 }
+
+.loader {
+    margin-left: 100px;
+    margin-top: 120px;
+    position: absolute;
+}
