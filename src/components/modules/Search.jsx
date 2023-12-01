@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { searchCoin } from "../../services/cryptoAPI";
+//Notification
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+//Loader
 import { TailSpin } from "react-loader-spinner";
+//Styles
+import styles from './Search.module.css'
 
 function Search({ currency, setCurrency }) {
   const [text, setText] = useState("");
@@ -63,7 +67,7 @@ function Search({ currency, setCurrency }) {
   };
 
   return (
-    <div>
+    <div className={styles.searchBox} >
       <ToastContainer />
       <input
         type="text"
@@ -76,7 +80,7 @@ function Search({ currency, setCurrency }) {
         <option value="eur">EUR</option>
         <option value="jpy">JPY</option>
       </select>
-      <div>
+      <div className={styles.searchResult} >
         <ul>
           {isLoading && (
             <TailSpin
