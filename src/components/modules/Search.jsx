@@ -80,7 +80,7 @@ function Search({ currency, setCurrency }) {
         <option value="eur">EUR</option>
         <option value="jpy">JPY</option>
       </select>
-      <div className={styles.searchResult} >
+      <div className={text.length && styles.searchResult} >
         <div className={styles.loader} >
           {isLoading && (
             <TailSpin
