@@ -4,7 +4,7 @@ import chartDown from "../../asset/chart-down.svg";
 //Styles
 import styles from "./TableRow.module.css";
 
-function TableRow({ coin, currency }) {
+function TableRow({ coin, currency, setChart }) {
   const {
     name,
     image,
@@ -14,20 +14,30 @@ function TableRow({ coin, currency }) {
     price_change_percentage_24h: price_change,
   } = coin;
 
+  const showHandler = () => {
+    setChart(true);
+  };
+
   return (
     <tr>
       <td>
-        <div className={styles.symbol}>
+        <div className={styles.symbol} onClick={showHandler}>
           <img src={image} alt={name} />
           <span>{symbol.toUpperCase()}</span>
         </div>
       </td>
       <td>{name}</td>
-     <td>{currency.symbol}{current_price.toLocaleString()}</td>
+      <td>
+        {currency.symbol}
+        {current_price.toLocaleString()}
+      </td>
       <td className={price_change > 0 ? styles.success : styles.error}>
         {price_change.toFixed(2)}%
       </td>
-      <td>{currency.symbol}{total_volume.toLocaleString()}</td>
+      <td>
+        {currency.symbol}
+        {total_volume.toLocaleString()}
+      </td>
       <td>
         <img src={price_change > 0 ? chartUp : chartDown} alt={name} />
       </td>
