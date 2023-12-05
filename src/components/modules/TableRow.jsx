@@ -3,9 +3,15 @@ import chartUp from "../../asset/chart-up.svg";
 import chartDown from "../../asset/chart-down.svg";
 //Styles
 import styles from "./TableRow.module.css";
+//API
+import { marketCahrt } from "../../services/cryptoAPI";
+//Notification
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function TableRow({ coin, currency, setChart }) {
   const {
+    id,
     name,
     image,
     symbol,
@@ -14,14 +20,36 @@ function TableRow({ coin, currency, setChart }) {
     price_change_percentage_24h: price_change,
   } = coin;
 
-  const showHandler = () => {
-    setChart(true);
+  const showHandler = async () => {
+    try {
+      const res = await fetch(marketCahrt(id));
+      const json = await res.json();
+      console.log(json);
+      setChart(json);
+    } catch (error) {
+      setChart(null);
+      notify(error);
+    }
   };
+
+  const notify = (error) =>
+    toast.error(`😕 ${error} `, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Slide,
+    });
 
   return (
     <tr>
       <td>
         <div className={styles.symbol} onClick={showHandler}>
+          <ToastContainer />
           <img src={image} alt={name} />
           <span>{symbol.toUpperCase()}</span>
         </div>
