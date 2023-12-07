@@ -24,7 +24,6 @@ function TableRow({ coin, currency, setChart }) {
     try {
       const res = await fetch(marketCahrt(id));
       const json = await res.json();
-      console.log(json);
       setChart(json);
     } catch (error) {
       setChart(null);
